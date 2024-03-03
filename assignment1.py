@@ -24,6 +24,7 @@ def odd_sum(a,b):
 # INI6
 def word_count(s):
     counts = dict()
+    # this problem doesn't work in this assignment because the input file is split into individual words, but it does work on any sentence input
     words = s.split()
     for i in words:
         if i in counts:
@@ -34,6 +35,7 @@ def word_count(s):
 
 # RNA
 def transcribe(s): 
+    # DNA -> RNA means thymine becomes uracil
     return s.replace("T", "U")
 
 # DNA
@@ -56,12 +58,16 @@ def main():
         dna_loc = data.index("##DNA")
 
         # writing outputs to output_assignment1.txt
+        # the input is the index of the problem + terms needed after it, translated into an integer if necessary for the function in question
         print("##INI2\n{}".format(hypotenuse(int(data[ini2_loc+1]),int(data[ini2_loc+2]))), file=fout)
         print("##INI3\n{}".format(sliced_string(data[ini3_loc+1],int(data[ini3_loc+2]),int(data[ini3_loc+3]),int(data[ini3_loc+4]),int(data[ini3_loc+5]))), file=fout)
         print("##INI4\n{}".format(odd_sum(int(data[ini4_loc+1]),int(data[ini4_loc+2]))), file=fout)
         print("##INI6\n{}".format(word_count(data[ini6_loc+1])), file=fout)
         print("##RNA\n{}".format(transcribe(data[rna_loc+1])), file=fout)
         print("##DNA\n{}".format(nucleotide_count(data[dna_loc+1])), file=fout)
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
