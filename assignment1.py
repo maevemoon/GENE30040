@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# 22206666
+# student number
 
 import sys
 import math
