@@ -46,7 +46,7 @@ def nucleotide_count(s):
 def main():
     with open(infile,'r') as fin, open(outfile,'w') as fout:
         # splitting data from input.txt
-        # data.append(line.strip(),split("\t")) is a better option for splitting the data up, however i could not figure out how to locate specific inputs with it 
+        # data.append(line.strip().split("\t")) is a better option for splitting the data up, however i could not figure out how to locate specific inputs with it 
         data = fin.read().split()
 
         # locating inputs (unfortunately was unable to make this work for every instance of a specific problem's input, so it only works on the first)
