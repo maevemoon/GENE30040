@@ -2,7 +2,7 @@
 # student number
 
 import sys
-import textwrap
+import math
 from mygff import *
 import matplotlib.pyplot as plt
 import numpy as np
@@ -30,22 +30,28 @@ def main():
         sequences = extract_orfs(gff_details, seq)
 
         # secondly, calculate gc proportion per window per gene
+        id = 1 # placing the plots anticlockwise on the subplot grid
         for k, v in sequences.items():
-            x = [] # im going crazy! i don't know how to define the nucleotide position.
+            x = range(0,len(v) - win_size() + 1)
             y = []
             for window in get_windows(v):
                 gc_proportion = (window.count("g") + window.count("c")) / len(window)
                 y.append(gc_proportion) # y-axis point to plot on graph
-            plt.figure()
-            plt.plot(x,y)
-            plt.title(k)
-            plt.xlabel("nucleotide position")
-            plt.ylabel("gc proportion")
-            plt.show()
+            ax = plt.subplot(math.ceil(len(sequences)/4),4,id) # ensuring there are enough rows for the plot
+            ax.plot(x,y)
+            # decoration, formatting
+            ax.set_title(k)
+            ax.axhline(y=np.nanmean(y),color="red") # adding horizontal average line
+            ax.set_xlabel("nucleotide position")
+            ax.set_ylabel("gc proportion")
+            id +=1
+    
+        plt.tight_layout() # so titles etc don't overlap
+        plt.show()
 
 if __name__ == "__main__":
 
-    # if len(sys.argv) != 3:
-    #     sys.exit("ERROR: Incorrect number of arguments used. Run the script as 'python assignment3.py <.gff file> <.fasta file>")
+    if len(sys.argv) != 3:
+        sys.exit("ERROR: Incorrect number of arguments used. Run the script as 'python assignment3.py <.gff file> <.fasta file>")
 
     main()
